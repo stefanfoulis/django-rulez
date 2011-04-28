@@ -42,3 +42,24 @@ access to some resources.
 In order to do so, simply call the has_role() method on the model extending
 ModelRoleMixin.
 
+Accessing roles and permissions in templates
+============================================
+
+.. Warning::
+   Do **NOT** use this for application logic. These template filters are made
+   available purely for presentational reasons. The template is not the place
+   to put application logic.
+
+Access roles and permissions in templates::
+    
+    {% load rolez_tags %}
+    {% if obj|has_role:'administrator' %}You are an admin!{% endif %}
+    
+    {{ user }} (you) has these roles for {{ obj }}:
+    <ul>
+    {% for role in obj|get_roles %}
+        <li>{{ role.name }}</li>
+    {% endif %}
+    </ul>
+
+    
